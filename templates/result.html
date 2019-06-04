@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="carousel-item active">
+        <img src="{{ url_for('static', filename='img/dna1.png') }}" class="d-block w-100" alt="Responsive image" height="500px">
+        
+    <div class="container mt-2" style="width: 200px;">
+        <h1 class="text-dark"> Class: {{ prediction }}</h1>
+    </div>
+    </div>
+       
+    
+{% endblock %}
+</body>
+</html>

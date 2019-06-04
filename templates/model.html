@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block body %}
+<br>
+<div class="container">
+    <h3>Classifying Gene Mutation</h3>
+</div>
+    <br>
+<div class="container">
+  <form action="/result" method="POST">
+    <label for="gene">Gene</label>
+    <select id="gene" name="gene">
+      <option value="ABL1">ABL1</option>
+      <option value="ACVR1">ACVR1</option>
+      <option value="BRCA1">BRCA1</option>
+      <option value="BRCA2">BRCA2</option>
+      <option value="CBL">CBL</option>
+      <option value="CDH1">CDH1</option>
+      <option value="CDKN2A">CDKN2A</option>
+      <option value="EGFR">EGFR</option>
+      <option value="ERBB2">ERBB2</option>
+      <option value="EWSR1">EWSR1</option>
+      <option value="FAM58A">FAM58A</option>
+      <option value="FANCA">FANCA</option>
+      <option value="HRAS">HRAS</option>
+      <option value="KIT">KIT</option>
+      <option value="PDGFRA">PDGFRA</option>
+      <option value="PTEN">PTEN</option>
+      <option value="TP53">TP53</option>
+    </select>
+    <br>
+    <label for="variation">Variation</label>
+    <input type="text" id="variation" name="variation">
+    <br>
+    <div class="form-group">
+      <label for="text">Text</label>
+      <textarea class="form-control" id="text" rows="13" name="text"></textarea>
+    </div>
+    
+    <input type="submit" class="btn btn-primary" value="Submit">
+  </form>
+</div>
+</body>
+
+{% endblock %}

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel = "stylesheet" href = "{{ url_for('static', filename='css/dc.css') }}"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename='css/style.css') }}">
+    
+    <script src="{{ url_for('static', filename='lib/jquery.js') }}"></script> 
+    <script src="{{ url_for('static', filename='lib/d3.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/biocircos-1.1.0.js') }}"></script>
+    
+    <title>Gene Variants</title>
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="/">Home</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/biocircos">Genome</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/model">Model</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  API
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/api/variation">Gene Variation</a>
+                  <a class="dropdown-item" href="/api/class">Gene Class</a>
+                  <a class="dropdown-item" href="/api/geneData">Gene Data</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+      </nav>
+      <!-- <div class="container-fluid">
+        <h4 class='text-center text-info text-uppercase'>Cancer driver genes</h4>
+      </div> -->
+
+      <div class="mx-auto" style="width: 900px;" id="biocircos">
+          <!-- <strong class="text-light">Class Frequency</strong>
+          <span class="reset text-light" style="display: none;">Selected: <span class="filter"></span></span>
+          <a class="reset" href="javascript:ClassTypeChart.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+          <div class="clearfix"></div> -->
+      </div>
+
+
+      <script src="{{ url_for('static', filename='js/SCATTER01.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/SCATTER02.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/SCATTER03.js') }}"></script>
+      <script>
+          var BioCircosGenome = [
+            ["1" , 249250621],
+            ["2" , 243199373],
+            ["3" , 198022430],
+            ["4" , 191154276],
+            ["5" , 180915260],
+            ["6" , 171115067],
+            ["7" , 159138663],
+            ["8" , 146364022],
+            ["9" , 141213431],
+            ["10" , 135534747],
+            ["11" , 135006516],
+            ["12" , 133851895],
+            ["13" , 115169878],
+            ["14" , 107349540],
+            ["15" , 102531392],
+            ["16" , 90354753],
+            ["17" , 81195210],
+            ["18" , 78077248],
+            ["19" , 59128983],
+            ["20" , 63025520],
+            ["21" , 48129895],
+            ["22" , 51304566],
+            ["X" , 155270560],
+            ["Y" , 59373566]
+          ];
+          BioCircos01 = new BioCircos(SCATTER01,SCATTER02,SCATTER03,BioCircosGenome,{
+            target : "biocircos",
+            svgWidth : 900,
+            svgHeight : 600,
+            chrPad : 0.04,
+            innerRadius: 240,
+            outerRadius: 260,
+            zoom : true,
+            genomeFillColor: ["#FFFFCC", "#CCFFFF", "#FFCCCC", "#CCCC99","#0099CC", "#996699", "#336699", "#FFCC33","#66CC00"],
+            SCATTERMouseOverDisplay : true,
+            SCATTERMouseOverTooltipsHtml01 : "chr : ",
+            SCATTERMouseOverTooltipsHtml02 : "<br>start : ",
+            SCATTERMouseOverTooltipsHtml03 : "<br>end : ",
+            SCATTERMouseOverTooltipsHtml04 : "<br>name : ",
+            SCATTERMouseOverTooltipsHtml05 : "<br>cancer : ",
+            SCATTERMouseOverTooltipsHtml06 : "",
+            SCATTERMouseOverTooltipsPosition : "absolute",
+            SCATTERMouseOverTooltipsBackgroundColor : "#D1EEEE",
+            SCATTERMouseOverTooltipsBorderStyle : "solid",
+            SCATTERMouseOverTooltipsBorderWidth : 0,
+            SCATTERMouseOverTooltipsPadding : "3px",
+            SCATTERMouseOverTooltipsBorderRadius : "5px",
+            SCATTERMouseOverTooltipsOpacity : 0.7,
+            SCATTERMouseOutDisplay : true,
+            SCATTERMouseOutAnimationTime : 800,
+            SCATTERMouseOutColor : "none",
+            SCATTERMouseOutCircleSize : "none",
+            SCATTERMouseOutCircleStrokeWidth : 0,
+            ticks : {
+                  "display" : true,
+                  "len" : 5,
+                  "color" : "#000",
+                  "textSize" : 10,
+                  "textColor" : "#000",
+                  "scale" : 30000000
+              },
+              genomeLabel : {
+                  "display" : true,
+                  "textSize" : 15,
+                  "textColor" : "#fff",
+                  "dx" : 0.028,
+                  "dy" : "-0.55em"
+              },
+          });
+          BioCircos01.draw_genome(BioCircos01.genomeLength);
+        </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
+    
+  
