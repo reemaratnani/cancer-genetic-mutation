@@ -1,12 +1,14 @@
 {% extends "layout.html" %}
 {% block body %}
-    <div class="carousel-item active">
-        <img src="{{ url_for('static', filename='img/dna1.png') }}" class="d-block w-100" alt="Responsive image" height="500px">
+    <div class="container mt-4">
+        <img src="{{ url_for('static', filename='img/dna1.png') }}" class="d-block w-100" alt="Responsive image" height="450px">
         
-    <div class="container mt-2" style="width: 200px;">
+    <div class="container" style="width: 200px;">
         <h1 class="text-dark"> Class: {{ prediction }}</h1>
+        <a class="btn btn-primary" href="/model" role="button">Return</a>
     </div>
     </div>
+    
        
     
 {% endblock %}
